@@ -13,7 +13,7 @@
 
 - 👯 I’m looking to collaborate on [mango](http://github.com/opeolluwa/mango)
 
-- 📫 How to reach me **adefemiadeoye [at] yahoo [dot] com**
+
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
