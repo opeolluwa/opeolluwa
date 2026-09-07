@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Igniton started";
+    std::cout << "Ignition started";
     httplib::Server svr;
 
     svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
