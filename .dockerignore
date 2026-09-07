@@ -1,0 +1,7 @@
+.cache 
+.github
+_deps
+build 
+*.md 
+cmake_install_cmake 
+.gitignore 
