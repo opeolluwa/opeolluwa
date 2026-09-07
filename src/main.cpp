@@ -33,6 +33,26 @@ int main() {
     render(home, data, res);
   });
 
+
+  svr.Get("/blog", [&](const httplib::Request &req, httplib::Response &res) {
+    json data;
+    data["title"] = "Home";
+    render(blog, data, res);
+  });
+
+  svr.Get("/contact", [&](const httplib::Request &req, httplib::Response &res) {
+    json data;
+    data["title"] = "Home";
+    render(contact, data, res);
+  });
+
+
+  svr.Get("/projects", [&](const httplib::Request &req, httplib::Response &res) {
+    json data;
+    data["title"] = "Home";
+    render(projects, data, res);
+  });
+  
   std::string message{std::format("listening to http://{}:{}", host, port)};
   spdlog::info(message);
   svr.listen(host, port);
