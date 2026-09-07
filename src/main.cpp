@@ -1,13 +1,18 @@
+#include "spdlog/spdlog.h"
+#include <format>
+#include <string.h>
 #include <httplib.h>
-#include <iostream>
 
 int main() {
-    std::cout << "Ignition started";
-    httplib::Server svr;
+  const unsigned int port{8080};
+  const std::string host{"0.0.0.0"};
 
-    svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-        res.set_content("Hello, World!", "text/plain");
-    });
+  httplib::Server svr;
+  svr.Get("/", [](const httplib::Request &, httplib::Response &res) {
+    res.set_content("Hello, World!", "text/plain");
+  });
 
-    svr.listen("0.0.0.0", 8080);
+  std::string message{std::format("listening to http://{}:{}", host, port)};
+  spdlog::info(message);
+  svr.listen(host, port);
 }
