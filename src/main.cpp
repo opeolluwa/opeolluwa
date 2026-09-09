@@ -3,7 +3,7 @@
 #include <inja.hpp>
 #include <json.hpp>
 #include <spdlog/spdlog.h>
-#include <string.h>
+#include <string>
 
 using json = nlohmann::json;
 
@@ -33,7 +33,6 @@ int main() {
     render(home, data, res);
   });
 
-
   svr.Get("/blog", [&](const httplib::Request &req, httplib::Response &res) {
     json data;
     data["title"] = "Home";
@@ -46,13 +45,13 @@ int main() {
     render(contact, data, res);
   });
 
+  svr.Get("/projects",
+          [&](const httplib::Request &req, httplib::Response &res) {
+            json data;
+            data["title"] = "Home";
+            render(projects, data, res);
+          });
 
-  svr.Get("/projects", [&](const httplib::Request &req, httplib::Response &res) {
-    json data;
-    data["title"] = "Home";
-    render(projects, data, res);
-  });
-  
   std::string message{std::format("listening to http://{}:{}", host, port)};
   spdlog::info(message);
   svr.listen(host, port);

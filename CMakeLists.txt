@@ -7,13 +7,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${PROJECT_NAME} PRIVATE include external)
 target_link_libraries(${PROJECT_NAME} spdlog::spdlog)
 
+enable_testing()
+
 include(FetchContent)
+
 FetchContent_Declare(
   spdlog
   GIT_REPOSITORY https://github.com/gabime/spdlog
   GIT_TAG    v1.17.0
 )
-FetchContent_MakeAvailable(spdlog)
+
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest
+  GIT_TAG    v1.18.0
+)
+
+FetchContent_MakeAvailable(spdlog googletest)
