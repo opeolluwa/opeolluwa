@@ -13,18 +13,12 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
-  drogon
-  GIT_REPOSITORY https://github.com/drogonframework/drogon
-  GIT_TAG    v1.9.13
-)
-
-FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest
   GIT_TAG    v1.18.0
 )
 
-FetchContent_MakeAvailable(spdlog googletest drogon)
+FetchContent_MakeAvailable(spdlog googletest)
 
 add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
@@ -36,7 +30,7 @@ target_sources(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include third_party)
-target_link_libraries(${PROJECT_NAME} spdlog::spdlog drogon)
+target_link_libraries(${PROJECT_NAME} spdlog::spdlog)
 
 enable_testing()
 

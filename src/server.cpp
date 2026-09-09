@@ -1,6 +1,5 @@
 #include <inja.hpp>
 #include <json.hpp>
-#include <memory>
 #include <server.hpp>
 
 using json = nlohmann::json;
