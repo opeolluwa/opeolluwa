@@ -1,37 +1,14 @@
 #include <format>
-#include <httplib.h>
-#include <inja.hpp>
-#include <json.hpp>
+#include <server.hpp>
 #include <spdlog/spdlog.h>
-#include <string.h>
-
-using json = nlohmann::json;
+#include <string>
 
 int main() {
   const unsigned int port{8080};
   const std::string host{"0.0.0.0"};
 
   httplib::Server svr;
-  svr.set_mount_point("/public", "./public");
-  svr.set_mount_point("/assets", "./assets");
-
-  inja::Environment env;
-  inja::Template home = env.parse_template("./templates/index.html");
-  inja::Template projects = env.parse_template("./templates/projects.html");
-  inja::Template blog = env.parse_template("./templates/blog.html");
-  inja::Template contact = env.parse_template("./templates/contact.html");
-
-  auto render = [&env](inja::Template &file, const json &data,
-                       httplib::Response &res) {
-    std::string result = env.render(file, data);
-    res.set_content(result, "text/html");
-  };
-
-  svr.Get("/", [&](const httplib::Request &req, httplib::Response &res) {
-    json data;
-    data["title"] = "Home";
-    render(home, data, res);
-  });
+  setup_server(svr);
 
   std::string message{std::format("listening to http://{}:{}", host, port)};
   spdlog::info(message);
